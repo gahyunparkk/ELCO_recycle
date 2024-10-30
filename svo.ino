@@ -24,11 +24,11 @@ void loop() {
   motor3.write(90);
 
   if (Serial.available() > 0) {  // 입력 값이 있을 때만 동작
-    char input = Serial.read();  // 시리얼로 입력 받은 값 읽기
+    int input = Serial.parseInt();
 
     // 입력 값에 따라 서보모터 제어
     switch (input) {
-      case '0':
+      case 0:
         motor1.write(135);  // 1번 모터를 45도 회전
         Serial.println("1번 모터: 45도");
         delay(5000);       // 1초 대기
@@ -36,7 +36,7 @@ void loop() {
         Serial.println("1번 모터: 90도로 복귀");
         break;
 
-      case '1':
+      case 1:
         motor1.write(180);  // 1번 모터는 이미 90도 상태 유지
         motor2.write(45);  // 2번 모터를 45도 회전
         Serial.println("1번 모터: 90도, 2번 모터: 45도");
@@ -46,7 +46,7 @@ void loop() {
         Serial.println("2번 모터 원상복구 (0도)");
         break;
 
-      case '2':
+      case 2:
         motor1.write(180);  // 1번 모터는 90도 유지
         motor2.write(90);   // 2번 모터를 0도 회전
         motor3.write(45);  // 3번 모터를 45도 회전
@@ -58,7 +58,7 @@ void loop() {
         Serial.println("2번, 3번 모터 원상복구 (0도)");
         break;
 
-      case '3':
+      case 3:
         motor1.write(180);  // 1번 모터는 이미 90도 유지
         motor2.write(90);   // 2번 모터를 0도 유지
         motor3.write(90);   // 3번 모터를 0도로 유지
@@ -71,7 +71,6 @@ void loop() {
         break;
 
       default:
-        Serial.println("잘못된 입력. 1, 2, 3, 4 중 하나를 입력하세요.");
         break;
     }
 
