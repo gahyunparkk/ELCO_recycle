@@ -40,7 +40,7 @@ void loop() {
         motor1.write(180);  // 1번 모터는 이미 90도 상태 유지
         motor2.write(45);  // 2번 모터를 45도 회전
         Serial.println("1번 모터: 90도, 2번 모터: 45도");
-        delay(2000);       // 1초 대기
+        delay(5000);       // 1초 대기
         motor1.write(90);
         motor2.write(90);   // 2번 모터 원상복구 (0도)
         Serial.println("2번 모터 원상복구 (0도)");
@@ -63,7 +63,7 @@ void loop() {
         motor2.write(90);   // 2번 모터를 0도 유지
         motor3.write(90);   // 3번 모터를 0도로 유지
         Serial.println("1번 모터: 90도, 2번 모터: 0도, 3번 모터: 0도");
-        delay(2000);       // 1초 대기
+        delay(5000);       // 1초 대기
         motor1.write(90);
         motor2.write(90);   // 2번 모터는 0도로 유지
         motor3.write(90);   // 3번 모터는 0도로 유지
@@ -75,6 +75,6 @@ void loop() {
     }
 
     // 모터가 원상복구되는 시간을 기다림
-    delay(1000);
+    delay(3000);
   }
 }
