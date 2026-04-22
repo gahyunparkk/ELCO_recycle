@@ -4,7 +4,7 @@ import serial
 import time
 
 # YOLOv8 모델 로드
-model = YOLO('C:/Users/gahyu/Downloads/runs/runs/detect/yolov8_cuton_model/weights/best.pt')
+model = YOLO('C:/Users/gahyu/Downloads/runs/runs/detect/yolov8_custom_model/weights/best.pt')
 
 # 시리얼 포트 설정 (아두이노 포트에 맞게 수정)
 arduino = serial.Serial('COM10', 9600)
