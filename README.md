@@ -9,20 +9,30 @@
 
 ## 🛠 Tech Stack
 
+### **Environment**
+| Category | Details |
+| :--- | :--- |
+| **OS** | Ubuntu 20.04 (Training) / Windows 10, 11 (Inference) |
+| **Language** | Python 3.10.11 |
+| **AI Framework** | YOLOv8n, PyTorch 2.2.0 (**CUDA 11.8**) |
+| **IDE/Tool** | Arduino IDE, VS Code |
+
 ### **Hardware**
 * **Controller:** Arduino Uno
-* **Actuator:** Servo Motor, LED
+* **Actuator:** Servo Motor x3, LED
 * **Sensor:** Logitech Webcam
 
-### **Software & AI**
-* **OS:** Ubuntu 20.04 (Linux), Windows
-* **Language:** Python 3.10.11
-* **Model:** YOLOv8n
-* **Library/Tool:**
-    * PyTorch 2.2.0
-    * **CUDA 11.8**
-    * Ultralytics
-    * Arduino IDE (Serial Communication)
+---
+
+## 🏗 System Architecture
+
+본 시스템은 웹캠을 통해 들어오는 영상 데이터를 실시간으로 분석하여 물리적인 분류까지 이어지는 통합 파이프라인으로 구성되어 있습니다.
+
+1.  **Data Capture:** 웹캠을 통해 쓰레기 이미지를 실시간으로 입력받습니다.
+2.  **Object Detection (YOLOv8):** 학습된 모델이 쓰레기의 종류를 4가지 클래스(캔, 종이, 플라스틱, 유리)로 분류합니다.
+3.  **Stability Logic (Decision):** 객체의 Class와 Bounding Box 좌표가 0.5초 동안 안정적으로 유지될 경우에만 실제 물체가 투입된 것으로 판단하여 신뢰성을 확보했습니다.
+4.  **Signal Processing:** 판단된 정보를 Serial 통신을 통해 아두이노로 전송합니다.
+5.  **Hardware Control:** 아두이노는 수신된 클래스 정보에 따라 3개의 서보 모터를 구동하여 쓰레기를 알맞은 투입구로 분류합니다.
 
 ---
 
@@ -65,18 +75,6 @@ pip install -r requirements.txt
 
 ---
 
-## 🏗 System Architecture
-
-본 시스템은 웹캠을 통해 들어오는 영상 데이터를 실시간으로 분석하여 물리적인 분류까지 이어지는 통합 파이프라인으로 구성되어 있습니다.
-
-1.  **Data Capture:** 웹캠을 통해 쓰레기 이미지를 실시간으로 입력받습니다.
-2.  **Object Detection (YOLOv8):** 학습된 모델이 쓰레기의 종류를 4가지 클래스로 분류합니다.
-3.  **Stability Logic (Decision):** 객체의 Class와 Bounding Box 좌표가 **0.5초 동안 안정적으로 유지**될 경우, 실제 물체가 인식된 것으로 판단합니다.
-4.  **Signal Processing:** 판단된 정보를 Serial 통신을 통해 아두이노로 전송합니다.
-5.  **Hardware Control:** 아두이노는 수신된 클래스 정보에 따라 서보 모터를 구동하여 쓰레기를 알맞은 투입구로 분류합니다.
-
----
-
 ## 📊 Model Training & Dataset
 
 실생활에서 높은 인식 정확도를 확보하기 위해 대규모 공공 데이터셋과 직접 구축한 커스텀 데이터셋을 혼합하여 학습을 진행했습니다.
@@ -92,10 +90,6 @@ pip install -r requirements.txt
     * **Batch Size:** 16
     * **Epoch:** 100
     * **Optimizer:** AdamW (Learning Rate: 0.001)
-
----
-
-
 
 ---
 
