@@ -94,6 +94,22 @@ pip install -r requirements.txt
 
 ---
 
+## 🔌 Hardware Pin Map
+
+아두이노 우노와 각 부품 간의 연결 정보입니다. 3개의 서보 모터를 활용하여 다중 분류 경로를 제어합니다.
+
+| Component | Arduino Pin | Role | Description |
+| :--- | :---: | :--- | :--- |
+| **Servo Motor 1** | **D9** | Main Gate | 쓰레기 투입구의 1차 방향 결정 |
+| **Servo Motor 2** | **D10** | Sub Gate A | 2차 분류 경로 제어 (A) |
+| **Servo Motor 3** | **D11** | Sub Gate B | 2차 분류 경로 제어 (B) |
+| **Logitech Webcam** | **USB** | Vision Sensor | PC와 연결하여 실시간 영상 데이터 전송 |
+| **External Power** | **5V/GND** | Power Supply | 서보 모터 구동을 위한 전원 공급 |
+
+> **Note:** 서보 모터는 구동 시 전류 소모가 크므로, 아두이노의 5V 핀보다는 외부 전원(5V)을 별도로 공급하고 접지(GND)를 공유하는 방식을 권장
+
+---
+
 ## 📚 References
 * [AI Hub 생활 폐기물 이미지 데이터셋](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=140)
 * [Ultralytics YOLOv8 Documentation](https://docs.ultralytics.com/)
